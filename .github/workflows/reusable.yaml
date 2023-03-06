@@ -30,7 +30,7 @@ jobs:
         echo "Logging in using $DOCKER_PASSWORD"
    - name: Push Image
      run: |
-       echo "Puch docker image to repo $ECR_REPO"
+       echo "Puch docker image to repo ECR_REPO"
    - name: Output message
      id: status
      run: |
