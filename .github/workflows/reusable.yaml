@@ -9,17 +9,19 @@ on:
           type: string
           default: "hello-world"
     outputs:
-       description" "The image name by the job"
-       job-status: ${{ jobs.build.outputs.message }}
+       message: 
+         description: The image name by the job
+         value: ${{ jobs.build.outputs.message }}
     secrets:
-       description: "Password to log into docker registry"           
+       docker-password:
+          description: Password to log into docker registry          
     
   
   
 jobs:
   build: 
    runs-on: ubuntu-latest
-   output:
+   outputs:
       message: ${{ steps.status.outputs.image-name}}
    steps:
    - name: Build code
@@ -27,7 +29,7 @@ jobs:
        echo "Building docker image: $DOCKER_IMAGE_TAG"
    - name: Docker login
      run: |
-        echo "Logging in using $DOCKER_PASSWORD"
+        echo "Logging in using ${{ github.secrets.docker-password }}"
    - name: Push Image
      run: |
        echo "Puch docker image to repo ECR_REPO"
