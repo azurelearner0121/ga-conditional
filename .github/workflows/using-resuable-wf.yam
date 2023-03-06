@@ -1,0 +1,19 @@
+name: This wf cals reusable wf
+on:
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out code
+      run: |
+        echo "Checking out code"
+    - name: Building code
+      uses: "./.github/workflows/reusable.yaml"
+      with:
+        docker-image-tag: "hello-world-2023"
+        secrets: ${{ github.secrets.docker-password }}
+    - name: "Get image name"
+      run: |
+         echo "image name is"
