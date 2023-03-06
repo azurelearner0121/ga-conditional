@@ -1,0 +1,37 @@
+name: I am a resuable workflow
+
+on:
+  workflow_call:
+    inputs:
+       docker-image-tag: 
+          description: "The tag to attach to the docker image"
+          required: false
+          type: string
+          default: "hello-world"
+    outputs:
+       description" "The image name by the job"
+       job-status: ${{ jobs.build.outputs.message }}
+    secrets:
+       description: "Password to log into docker registry"           
+    
+  
+  
+jobs:
+  build: 
+   runs-on: ubuntu-latest
+   output:
+      message: ${{ steps.status.outputs.image-name}}
+   steps:
+   - name: Build code
+     run: |
+       echo "Building docker image: $DOCKER_IMAGE_TAG"
+   - name: Docker login
+     run: |
+        echo "Logging in using $DOCKER_PASSWORD"
+   - name: Push Image
+     run: |
+       echo "Puch docker image to repo $ECR_REPO"
+   - name: Output message
+     id: status
+     run: |
+        echo "image-name=image-01-02-03" >> $GITHUB_OUTPUT
