@@ -1,8 +1,7 @@
-name: Website Deployment
+name: conditional-workflow
 on:
-  push:
-    branches:
-      - main
+ workflow_dispatch:
+ 
 jobs:
   lint:
     runs-on: ubuntu-latest
