@@ -81,6 +81,6 @@ jobs:
      steps:
      - name: Echo status
        run: |
-         echo"Oops something went wrong"
+         echo "Oops something went wrong"
          
   
